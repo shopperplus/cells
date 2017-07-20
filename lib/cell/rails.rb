@@ -32,6 +32,14 @@ module Cell
         # FIXME: too much redundancy from Base.
         Builder.new(class_from_cell_name(name), controller).call(controller, *args) # use Cell::Rails::Builder.
       end
+
+      def helper *args, &block
+        modules_for_helpers(args).each do |mod|
+          self.include(mod)
+        end
+
+        super
+      end
     end
 
 
